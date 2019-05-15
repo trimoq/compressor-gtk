@@ -1,0 +1,14 @@
+[package]
+name = "compressor-gtk"
+version = "0.1.0"
+authors = ["Marco Amann <marco@amann.dev>"]
+edition = "2018"
+
+[dependencies]
+compressor = { path = "../compressor", version = "0.1.0" }
+gio = "^0"
+gtk = "^0"
+url = "1.4"
+gdk = "^0"
+glib = "^0"
+lazy_static = "1.3.0"
