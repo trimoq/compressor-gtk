@@ -1,0 +1,3 @@
+- prepare rust: see https://gtk-rs.org/docs-src/tutorial/cross
+- select version and features: https://gtk-rs.org/docs-src/tutorial/version
+- build for target: cargo build --release --target=x86_64-pc-windows-gnu

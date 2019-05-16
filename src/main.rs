@@ -72,6 +72,16 @@ impl CompressorUI{
             file_chooser_dialog(window,btn_file_tx.clone(),btn_file_rc.clone());
         });
 
+        let btn_quit: Button = builder.get_object("btn_quit").expect("Couldn't get btn_file");
+        let btn_quit_win_ref = window_weak.clone();
+        btn_quit.connect_clicked( move |_| {
+            let window = match btn_quit_win_ref.upgrade(){
+                Some(w) => w,
+                _ => return ()
+            };
+            window.destroy();
+        });
+
         let targets = vec![gtk::TargetEntry::new("text/uri-list", TargetFlags::OTHER_APP, 0)];
         let text_view: TextView = builder.get_object("text_view").expect("Couldn't get text_view");
         text_view.drag_dest_set(DestDefaults::HIGHLIGHT, &targets, DragAction::COPY);
