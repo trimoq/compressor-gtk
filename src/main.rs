@@ -72,15 +72,17 @@ impl CompressorUI{
             file_chooser_dialog(window,btn_file_tx.clone(),btn_file_rc.clone());
         });
 
-        let btn_quit: Button = builder.get_object("btn_quit").expect("Couldn't get btn_file");
-        let btn_quit_win_ref = window_weak.clone();
-        btn_quit.connect_clicked( move |_| {
-            let window = match btn_quit_win_ref.upgrade(){
+
+        let menu_item_quit: ImageMenuItem = builder.get_object("mi_quit").expect("Couldn't get mi_quit");
+        let menu_item_quit_win_ref = window_weak.clone();
+        menu_item_quit.connect_activate( move |_| {
+            let window = match menu_item_quit_win_ref.upgrade(){
                 Some(w) => w,
                 _ => return ()
             };
             window.destroy();
         });
+
 
         let targets = vec![gtk::TargetEntry::new("text/uri-list", TargetFlags::OTHER_APP, 0)];
         let text_view: TextView = builder.get_object("text_view").expect("Couldn't get text_view");
@@ -108,7 +110,7 @@ impl CompressorUI{
         });
 
 
-        let menu_item_open: ImageMenuItem = builder.get_object("mi_open").expect("Couldn't get text_view");
+        let menu_item_open: ImageMenuItem = builder.get_object("mi_open").expect("Couldn't get mi_open");
         let menu_item_open_win_ref = window_weak.clone();
         let menu_item_open_tx = tx.clone();
         let menu_item_open_rc = self.paths.clone();

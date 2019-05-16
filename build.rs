@@ -13,7 +13,8 @@ fn main() {
         .args(&["crus", "libprogram.a", "program.o"])
         .current_dir(&Path::new(&out_dir))
         .status().unwrap();
-
+    #[cfg(target_os = "windows")]
     println!("cargo:rustc-link-search=native={}", out_dir);
+    #[cfg(target_os = "windows")]
     println!("cargo:rustc-link-lib=static=program");
 }
